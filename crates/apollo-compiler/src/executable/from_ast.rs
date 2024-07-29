@@ -30,10 +30,10 @@ pub(crate) fn document_from_ast(
             ast::Definition::OperationDefinition(operation) => {
                 if let Some(name) = &operation.name {
                     if let Some(anonymous) = &anonymous_operation {
-                        errors.errors.push(
-                            anonymous.location(),
-                            BuildError::AmbiguousAnonymousOperation,
-                        )
+                        // errors.errors.push(
+                        //     anonymous.location(),
+                        //     BuildError::AmbiguousAnonymousOperation,
+                        // )
                     }
                     if let Entry::Vacant(entry) = named_operations.entry(name.clone()) {
                         errors.path.root = ExecutableDefinitionName::NamedOperation(
@@ -43,50 +43,50 @@ pub(crate) fn document_from_ast(
                         if let Some(op) = Operation::from_ast(schema, &mut errors, operation) {
                             entry.insert(operation.same_location(op));
                         } else {
-                            errors.errors.push(
-                                operation.location(),
-                                BuildError::UndefinedRootOperation {
-                                    operation_type: operation.operation_type.name(),
-                                },
-                            )
+                            // errors.errors.push(
+                            //     operation.location(),
+                            //     BuildError::UndefinedRootOperation {
+                            //         operation_type: operation.operation_type.name(),
+                            //     },
+                            // )
                         }
                     } else {
                         let (key, _) = named_operations.get_key_value(name).unwrap();
-                        errors.errors.push(
-                            name.location(),
-                            BuildError::OperationNameCollision {
-                                name_at_previous_location: key.clone(),
-                            },
-                        );
+                        // errors.errors.push(
+                        //     name.location(),
+                        //     BuildError::OperationNameCollision {
+                        //         name_at_previous_location: key.clone(),
+                        //     },
+                        // );
                     }
                 } else if let Some(previous) = &anonymous_operation {
                     if !multiple_anonymous {
-                        multiple_anonymous = true;
-                        errors
-                            .errors
-                            .push(previous.location(), BuildError::AmbiguousAnonymousOperation)
+                        // multiple_anonymous = true;
+                        // errors
+                        //     .errors
+                        //     .push(previous.location(), BuildError::AmbiguousAnonymousOperation)
                     }
-                    errors.errors.push(
-                        operation.location(),
-                        BuildError::AmbiguousAnonymousOperation,
-                    )
+                    // errors.errors.push(
+                    //     operation.location(),
+                    //     BuildError::AmbiguousAnonymousOperation,
+                    // )
                 } else if !named_operations.is_empty() {
-                    errors.errors.push(
-                        operation.location(),
-                        BuildError::AmbiguousAnonymousOperation,
-                    )
+                    // errors.errors.push(
+                    //     operation.location(),
+                    //     BuildError::AmbiguousAnonymousOperation,
+                    // )
                 } else {
                     errors.path.root =
                         ExecutableDefinitionName::AnonymousOperation(operation.operation_type);
                     if let Some(op) = Operation::from_ast(schema, &mut errors, operation) {
                         anonymous_operation = Some(operation.same_location(op));
                     } else {
-                        errors.errors.push(
-                            operation.location(),
-                            BuildError::UndefinedRootOperation {
-                                operation_type: operation.operation_type.name(),
-                            },
-                        )
+                        // errors.errors.push(
+                        //     operation.location(),
+                        //     BuildError::UndefinedRootOperation {
+                        //         operation_type: operation.operation_type.name(),
+                        //     },
+                        // )
                     }
                 }
             }
@@ -213,21 +213,23 @@ impl SelectionSet {
                                 .and_then(|schema| schema.types.get(type_name))
                             {
                                 Some(schema::ExtendedType::Scalar(_)) if !leaf => {
-                                    errors.errors.push(
-                                        ast.location(),
-                                        BuildError::SubselectionOnScalarType {
-                                            type_name: type_name.clone(),
-                                            path: errors.path.clone(),
-                                        },
-                                    )
+                                    // errors.errors.push(
+                                    //     ast.location(),
+                                    //     BuildError::SubselectionOnScalarType {
+                                    //         type_name: type_name.clone(),
+                                    //         path: errors.path.clone(),
+                                    //     },
+                                    // )
                                 }
-                                Some(schema::ExtendedType::Enum(_)) if !leaf => errors.errors.push(
-                                    ast.location(),
-                                    BuildError::SubselectionOnEnumType {
-                                        type_name: type_name.clone(),
-                                        path: errors.path.clone(),
-                                    },
-                                ),
+                                Some(schema::ExtendedType::Enum(_)) if !leaf => {
+                                    // errors.errors.push(
+                                    //     ast.location(),
+                                    //     BuildError::SubselectionOnEnumType {
+                                    //         type_name: type_name.clone(),
+                                    //         path: errors.path.clone(),
+                                    //     },
+                                    // )
+                                },
                                 _ => self.push(
                                     ast.same_location(
                                         Field::new(ast.name.clone(), field_def)
