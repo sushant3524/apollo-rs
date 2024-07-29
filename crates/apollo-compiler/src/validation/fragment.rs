@@ -78,27 +78,29 @@ fn validate_fragment_spread_type(
                 // TODO(@goto-bus-stop) Can we guarantee this unwrap()?
                 let fragment_definition = document.fragments.get(&spread.fragment_name).unwrap();
 
-                diagnostics.push(
-                    spread.location(),
-                    DiagnosticData::InvalidFragmentSpread {
-                        name: Some(spread.fragment_name.clone()),
-                        type_name: against_type.clone(),
-                        type_condition: type_condition.clone(),
-                        fragment_location: fragment_definition.location(),
-                        type_location: against_type_definition.location(),
-                    },
-                )
+                // diagnostics.push(
+                //     spread.location(),
+                //     DiagnosticData::InvalidFragmentSpread {
+                //         name: Some(spread.fragment_name.clone()),
+                //         type_name: against_type.clone(),
+                //         type_condition: type_condition.clone(),
+                //         fragment_location: fragment_definition.location(),
+                //         type_location: against_type_definition.location(),
+                //     },
+                // )
             }
-            executable::Selection::InlineFragment(inline) => diagnostics.push(
-                inline.location(),
-                DiagnosticData::InvalidFragmentSpread {
-                    name: None,
-                    type_name: against_type.clone(),
-                    type_condition: type_condition.clone(),
-                    fragment_location: inline.location(),
-                    type_location: against_type_definition.location(),
-                },
-            ),
+            executable::Selection::InlineFragment(inline) => {
+                // diagnostics.push(
+                //     inline.location(),
+                //     DiagnosticData::InvalidFragmentSpread {
+                //         name: None,
+                //         type_name: against_type.clone(),
+                //         type_condition: type_condition.clone(),
+                //         fragment_location: inline.location(),
+                //         type_location: against_type_definition.location(),
+                //     },
+                // )
+            },
         };
     }
 }
@@ -310,13 +312,13 @@ pub(crate) fn validate_fragment_cycles(
         Err(CycleError::Limit(_)) => {
             let head_location = NodeLocation::recompose(def.location(), def.name.location());
 
-            diagnostics.push(
-                head_location,
-                DiagnosticData::DeeplyNestedType {
-                    name: def.name.clone(),
-                    describe_type: "fragment",
-                },
-            );
+            // diagnostics.push(
+            //     head_location,
+            //     DiagnosticData::DeeplyNestedType {
+            //         name: def.name.clone(),
+            //         describe_type: "fragment",
+            //     },
+            // );
         }
     };
 }
@@ -342,13 +344,13 @@ pub(crate) fn validate_fragment_type_condition(
         });
 
     if !is_composite {
-        diagnostics.push(
-            fragment_location,
-            DiagnosticData::InvalidFragmentTarget {
-                name: fragment_name,
-                ty: type_cond.clone(),
-            },
-        );
+        // diagnostics.push(
+        //     fragment_location,
+        //     DiagnosticData::InvalidFragmentTarget {
+        //         name: fragment_name,
+        //         ty: type_cond.clone(),
+        //     },
+        // );
     }
 }
 

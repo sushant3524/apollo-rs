@@ -190,26 +190,27 @@ pub(crate) fn validate_leaf_field_selection(
         None => return Ok(()),
     };
 
-    if is_leaf
-        && matches!(
-            type_def,
-            schema::ExtendedType::Object(_)
-                | schema::ExtendedType::Interface(_)
-                | schema::ExtendedType::Union(_)
-        )
-    {
-        diagnostics.push(
-            field.location(),
-            DiagnosticData::MissingSubselection {
-                coordinate: TypeAttributeCoordinate {
-                    ty: tname.clone(),
-                    attribute: fname.clone(),
-                },
-                describe_type: type_def.describe(),
-            },
-        );
-        Err(())
-    } else {
-        Ok(())
-    }
+    // if is_leaf
+    //     && matches!(
+    //         type_def,
+    //         schema::ExtendedType::Object(_)
+    //             | schema::ExtendedType::Interface(_)
+    //             | schema::ExtendedType::Union(_)
+    //     )
+    // {
+    //     diagnostics.push(
+    //         field.location(),
+    //         DiagnosticData::MissingSubselection {
+    //             coordinate: TypeAttributeCoordinate {
+    //                 ty: tname.clone(),
+    //                 attribute: fname.clone(),
+    //             },
+    //             describe_type: type_def.describe(),
+    //         },
+    //     );
+    //     Err(())
+    // } else {
+    //     Ok(())
+    // }
+    Ok(())
 }
