@@ -197,12 +197,12 @@ pub(crate) fn validate_unused_variables(
     }
 
     for &unused_var in defined_vars.difference(&used_vars) {
-        diagnostics.push(
-            locations[unused_var],
-            DiagnosticData::UnusedVariable {
-                name: unused_var.clone(),
-            },
-        )
+        // diagnostics.push(
+        //     locations[unused_var],
+        //     DiagnosticData::UnusedVariable {
+        //         name: unused_var.clone(),
+        //     },
+        // )
     }
 }
 

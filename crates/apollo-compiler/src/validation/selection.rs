@@ -317,7 +317,7 @@ impl<'doc> MergedFieldSet<'doc> {
             for field_b in rest {
                 // Covers steps 3-5 of the spec algorithm.
                 if let Err(err) = same_output_type_shape(validator.schema, *field_a, *field_b) {
-                    diagnostics.push(field_b.field.location(), err);
+                    // diagnostics.push(field_b.field.location(), err);
                     continue;
                 }
             }

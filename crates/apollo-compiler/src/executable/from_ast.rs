@@ -159,13 +159,13 @@ impl Fragment {
     ) -> Option<Self> {
         if let Some(schema) = schema {
             if !schema.types.contains_key(&ast.type_condition) {
-                errors.errors.push(
-                    ast.type_condition.location(),
-                    BuildError::UndefinedTypeInNamedFragmentTypeCondition {
-                        type_name: ast.type_condition.clone(),
-                        fragment_name: ast.name.clone(),
-                    },
-                );
+                // errors.errors.push(
+                //     ast.type_condition.location(),
+                //     BuildError::UndefinedTypeInNamedFragmentTypeCondition {
+                //         type_name: ast.type_condition.clone(),
+                //         fragment_name: ast.name.clone(),
+                //     },
+                // );
                 return None;
             }
         }
@@ -244,14 +244,14 @@ impl SelectionSet {
                             }
                         }
                         Err(schema::FieldLookupError::NoSuchField(type_name, _)) => {
-                            errors.errors.push(
-                                ast.name.location(),
-                                BuildError::UndefinedField {
-                                    type_name: type_name.clone(),
-                                    field_name: ast.name.clone(),
-                                    path: errors.path.clone(),
-                                },
-                            )
+                            // errors.errors.push(
+                            //     ast.name.location(),
+                            //     BuildError::UndefinedField {
+                            //         type_name: type_name.clone(),
+                            //         field_name: ast.name.clone(),
+                            //         path: errors.path.clone(),
+                            //     },
+                            // )
                         }
                         Err(schema::FieldLookupError::NoSuchType) => {
                             // `self.ty` is the name of a type not definied in the schema.
@@ -278,13 +278,13 @@ impl SelectionSet {
                         (Some(type_condition), Some(schema))
                             if !schema.types.contains_key(type_condition) =>
                         {
-                            errors.errors.push(
-                                type_condition.location(),
-                                BuildError::UndefinedTypeInInlineFragmentTypeCondition {
-                                    type_name: type_condition.clone(),
-                                    path: errors.path.clone(),
-                                },
-                            )
+                            // errors.errors.push(
+                            //     type_condition.location(),
+                            //     BuildError::UndefinedTypeInInlineFragmentTypeCondition {
+                            //         type_name: type_condition.clone(),
+                            //         path: errors.path.clone(),
+                            //     },
+                            // )
                         }
                         _ => self.push(
                             ast.same_location(

@@ -187,12 +187,12 @@ pub(crate) fn validate_fragment_spread(
             validate_fragment_definition(diagnostics, document, def, context);
         }
         None => {
-            diagnostics.push(
-                spread.location(),
-                DiagnosticData::UndefinedFragment {
-                    name: spread.fragment_name.clone(),
-                },
-            );
+            // diagnostics.push(
+            //     spread.location(),
+            //     DiagnosticData::UndefinedFragment {
+            //         name: spread.fragment_name.clone(),
+            //     },
+            // );
         }
     }
 }
@@ -376,12 +376,12 @@ pub(crate) fn validate_fragment_used(
     //
     // Returns Unused Fragment error.
     if !is_used {
-        diagnostics.push(
-            fragment.location(),
-            DiagnosticData::UnusedFragment {
-                name: fragment_name.clone(),
-            },
-        )
+        // diagnostics.push(
+        //     fragment.location(),
+        //     DiagnosticData::UnusedFragment {
+        //         name: fragment_name.clone(),
+        //     },
+        // )
     }
 }
 
