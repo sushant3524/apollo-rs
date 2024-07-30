@@ -111,13 +111,13 @@ impl<'a> Iterator for Lexer<'a> {
             return None;
         }
 
-        if self.limit_tracker.check_and_increment() {
-            self.finished = true;
-            return Some(Err(Error::limit(
-                "token limit reached, aborting lexing",
-                self.cursor.index(),
-            )));
-        }
+        // if self.limit_tracker.check_and_increment() {
+        //     self.finished = true;
+        //     return Some(Err(Error::limit(
+        //         "token limit reached, aborting lexing",
+        //         self.cursor.index(),
+        //     )));
+        // }
 
         match self.cursor.advance() {
             Ok(token) => {

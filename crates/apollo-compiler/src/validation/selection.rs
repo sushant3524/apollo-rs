@@ -547,29 +547,29 @@ pub(crate) fn validate_selection_set(
     selection_set: &SelectionSet,
     context: OperationValidationContext<'_>,
 ) {
-    for selection in &selection_set.selections {
-        match selection {
-            executable::Selection::Field(field) => {
-                super::field::validate_field(diagnostics, document, against_type, field, context)
-            }
-            executable::Selection::FragmentSpread(fragment) => {
-                super::fragment::validate_fragment_spread(
-                    diagnostics,
-                    document,
-                    against_type,
-                    fragment,
-                    context,
-                )
-            }
-            executable::Selection::InlineFragment(inline) => {
-                super::fragment::validate_inline_fragment(
-                    diagnostics,
-                    document,
-                    against_type,
-                    inline,
-                    context,
-                )
-            }
-        }
-    }
+    // for selection in &selection_set.selections {
+    //     match selection {
+    //         executable::Selection::Field(field) => {
+    //             super::field::validate_field(diagnostics, document, against_type, field, context)
+    //         }
+    //         executable::Selection::FragmentSpread(fragment) => {
+    //             super::fragment::validate_fragment_spread(
+    //                 diagnostics,
+    //                 document,
+    //                 against_type,
+    //                 fragment,
+    //                 context,
+    //             )
+    //         }
+    //         executable::Selection::InlineFragment(inline) => {
+    //             super::fragment::validate_inline_fragment(
+    //                 diagnostics,
+    //                 document,
+    //                 against_type,
+    //                 inline,
+    //                 context,
+    //             )
+    //         }
+    //     }
+    // }
 }
